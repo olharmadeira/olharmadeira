@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Olhar Madeira - Atualizado</title>
+  <title>Olhar Madeira Fotografia</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,9 +18,9 @@
       --c-terracotta: #8f5108;
       --c-brown-dark: #2d1800;
       --c-bg-dark: #1b1311;
-      --c-charcoal: #2e2e2e;
+      --c-charcoal: #191919;
       --font-title: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-body: 'Neue Montreal', 'Inter', -apple-system, sans-serif;
     }
 
     * {
@@ -43,13 +43,18 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    p, span, .testimonial-text, .about-text p, .faq-answer, .blog-excerpt, .blog-title, .faq-question {
+      font-family: var(--font-body);
+      color: var(--c-charcoal);
+    }
+
     header {
       position: sticky;
       top: 0;
       background-color: var(--c-bg-dark);
       border-bottom: 1px solid rgba(235, 203, 133, 0.15);
       z-index: 1000;
-      padding: 1rem 1.5rem;
+      padding: 0.8rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -63,7 +68,7 @@
     }
 
     .logo-img {
-      height: 28px;
+      height: 38px;
       width: auto;
       display: block;
     }
@@ -224,11 +229,12 @@
 
     .section-header {
       font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--c-terracotta);
+      font-weight: 600;
+      color: var(--c-charcoal);
       margin-bottom: 2rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
+      font-family: var(--font-body);
     }
 
     .hero {
@@ -249,6 +255,7 @@
       font-size: clamp(2.5rem, 6vw, 4.2rem);
       font-weight: 400;
       line-height: 1.1;
+      color: var(--c-white);
     }
 
     .immersive-gallery {
@@ -337,10 +344,13 @@
     .arrow-left { left: 10px; }
     .arrow-right { right: 10px; }
 
+    /* Fundo alterado para #fdfdfd */
     .testimonials-section {
-      background-color: var(--c-sand-light);
+      background-color: #fdfdfd;
       padding: 5rem 0;
       position: relative;
+      border-top: 1px solid var(--c-sand-light);
+      border-bottom: 1px solid var(--c-sand-light);
     }
 
     .testimonials-wrapper {
@@ -421,13 +431,14 @@
     }
 
     .about-quote {
-      font-family: var(--font-title);
-      font-size: 1.6rem;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 1.35rem;
       font-style: italic;
-      color: var(--c-terracotta);
-      line-height: 1.4;
+      color: var(--c-charcoal);
+      line-height: 1.6;
       margin-bottom: 1.5rem;
-      border-left: 2px solid var(--c-gold-soft);
+      border-left: 2px solid #1b1311;
       padding-left: 1.2rem;
     }
 
@@ -472,7 +483,6 @@
 
     .blog-section {
       background-color: var(--c-offwhite);
-      border-top: 1px solid var(--c-sand-light);
       border-bottom: 1px solid var(--c-sand-light);
     }
 
@@ -515,7 +525,7 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: var(--c-terracotta);
+      color: var(--c-charcoal);
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
@@ -615,9 +625,18 @@
     footer {
       background-color: var(--c-bg-dark);
       border-top: 1px solid rgba(235, 203, 133, 0.12);
-      padding: 4rem 1.5rem 2rem 1.5rem;
+      padding: 3rem 1.5rem;
       text-align: center;
-      color: var(--c-gold-soft);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .footer-logo {
+      height: 32px;
+      width: auto;
+      display: block;
     }
 
     @media (max-width: 768px) {
@@ -632,12 +651,10 @@
 </head>
 <body>
 
+  <!-- HEADER COM LOGOTIPO EM PNG -->
   <header>
     <a href="#" class="brand-logo">
-      <svg class="logo-img" viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="0" y="45" font-family="'Cormorant Garamond', serif" font-size="42" font-weight="400" fill="#FFFFFF" letter-spacing="1">Olhar Madeira</text>
-        <text x="65" y="70" font-family="'Inter', sans-serif" font-size="14" font-weight="300" fill="#FFFFFF" letter-spacing="6">FOTOGRAFIA</text>
-      </svg>
+      <img src="-1.png" alt="Olhar Madeira Fotografia" class="logo-img">
     </a>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
@@ -647,37 +664,39 @@
     </button>
 
     <nav id="navMenu">
-      <div class="dropdown" onclick="this.classList.toggle('active')">
-        <button class="dropbtn">Ensaios &#9662;</button>
+      <div class="dropdown" id="dropEnsaios">
+        <button class="dropbtn" onclick="toggleDropdown(event, 'dropEnsaios')">Ensaios &#9662;</button>
         <div class="dropdown-content">
-          <a href="ensaio-familia.html">Família</a>
-          <a href="ensaio-gestante.html">Gestante</a>
-          <a href="ensaio-feminino.html">Retrato Feminino</a>
-          <a href="ensaio-prewedding.html">Pré-Wedding / Casal</a>
+          <a href="ensaio-familia.html" class="nav-close-item">Família</a>
+          <a href="ensaio-gestante.html" class="nav-close-item">Gestante</a>
+          <a href="ensaio-feminino.html" class="nav-close-item">Retrato Feminino</a>
+          <a href="ensaio-prewedding.html" class="nav-close-item">Pré-Wedding / Casal</a>
         </div>
       </div>
 
-      <div class="dropdown" onclick="this.classList.toggle('active')">
-        <button class="dropbtn">Eventos &#9662;</button>
+      <div class="dropdown" id="dropEventos">
+        <button class="dropbtn" onclick="toggleDropdown(event, 'dropEventos')">Eventos &#9662;</button>
         <div class="dropdown-content">
-          <a href="evento-casamento.html">Casamento / Civil</a>
-          <a href="evento-infantil.html">Festa Infantil</a>
-          <a href="evento-chadebebe.html">Chá de Bebê</a>
+          <a href="evento-casamento.html" class="nav-close-item">Casamento / Civil</a>
+          <a href="evento-infantil.html" class="nav-close-item">Festa Infantil</a>
+          <a href="evento-chadebebe.html" class="nav-close-item">Chá de Bebê</a>
         </div>
       </div>
 
-      <a href="#depoimentos">Depoimentos</a>
-      <a href="#blog">Blog</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#faq">Dúvidas</a>
-      <a href="https://wa.me/message/LQ3BE4TDBZ74J1" target="_blank">Contato</a>
+      <a href="#depoimentos" class="nav-close-item">Depoimentos</a>
+      <a href="#blog" class="nav-close-item">Blog</a>
+      <a href="#sobre" class="nav-close-item">Sobre</a>
+      <a href="#faq" class="nav-close-item">FAQ</a>
+      <a href="https://wa.me/message/LQ3BE4TDBZ74J1" target="_blank" class="nav-close-item">Contato</a>
     </nav>
   </header>
 
+  <!-- HERO -->
   <section class="hero">
     <h1 class="hero-title">Nosso ensaio<br>com a nossa cara.</h1>
   </section>
 
+  <!-- GALERIA IMERSIVA -->
   <section id="galeria" class="immersive-gallery">
     <div class="gallery-container-wrapper">
       <div class="slider-arrow arrow-left" onclick="scrollContainer('immersiveScroll', -1)">
@@ -717,9 +736,10 @@
     </div>
   </section>
 
+  <!-- DEPOIMENTOS (FUNDO #fdfdfd) -->
   <section id="depoimentos" class="testimonials-section">
     <div class="testimonials-wrapper">
-      <div class="section-header" style="color: var(--c-terracotta);">// O que dizem nossos clientes</div>
+      <div class="section-header">// O que dizem nossos clientes</div>
       <h2 style="font-family: var(--font-title); font-size: 2.2rem; color: var(--c-brown-dark); margin-bottom: 2.5rem;">Histórias reais, emoções eternizadas</h2>
       
       <div class="testimonials-container-wrapper">
@@ -757,41 +777,41 @@
     </div>
   </section>
 
-  <section id="blog" class="blog-section">
-    <div class="container">
-      <div class="section-header">// Novidades no blog</div>
-      <div class="blog-grid" id="blogGrid">
-        <div class="blog-card">
-          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Casal" class="blog-img">
-          <div class="blog-content">
-            <div class="blog-tag">Dicas & Prep</div>
-            <h3 class="blog-title">Como escolher o look ideal para o seu ensaio ao ar livre</h3>
-            <p class="blog-excerpt">Pequenos detalhes de paleta e tecido ajudam a trazer harmonia e autenticidade aos registros.</p>
-            <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
-          </div>
+  <!-- BLOG -->
+  <section id="blog" class="blog-section container">
+    <div class="section-header">// Novidades no blog</div>
+    <div class="blog-grid" id="blogGrid">
+      <div class="blog-card">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Casal" class="blog-img">
+        <div class="blog-content">
+          <div class="blog-tag">Dicas & Prep</div>
+          <h3 class="blog-title">Como escolher o look ideal para o seu ensaio ao ar livre</h3>
+          <p class="blog-excerpt">Pequenos detalhes de paleta e tecido ajudam a trazer harmonia e autenticidade aos registros.</p>
+          <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
         </div>
-        <div class="blog-card">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Família" class="blog-img">
-          <div class="blog-content">
-            <div class="blog-tag">Histórias</div>
-            <h3 class="blog-title">A beleza da espontaneidade nos registros em família</h3>
-            <p class="blog-excerpt">Por que os melhores momentos acontecem quando você esquece da câmera.</p>
-            <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
-          </div>
+      </div>
+      <div class="blog-card">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Família" class="blog-img">
+        <div class="blog-content">
+          <div class="blog-tag">Histórias</div>
+          <h3 class="blog-title">A beleza da espontaneidade nos registros em família</h3>
+          <p class="blog-excerpt">Por que os melhores momentos acontecem quando você esquece da câmera.</p>
+          <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
         </div>
-        <div class="blog-card">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Branding" class="blog-img">
-          <div class="blog-content">
-            <div class="blog-tag">Branding</div>
-            <h3 class="blog-title">Retrato Feminino: Como a fotografia fortalece sua marca</h3>
-            <p class="blog-excerpt">Transmitir autoridade e conexão através de imagens planejadas.</p>
-            <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
-          </div>
+      </div>
+      <div class="blog-card">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Branding" class="blog-img">
+        <div class="blog-content">
+          <div class="blog-tag">Branding</div>
+          <h3 class="blog-title">Retrato Feminino: Como a fotografia fortalece sua marca</h3>
+          <p class="blog-excerpt">Transmitir autoridade e conexão através de imagens planejadas.</p>
+          <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- SOBRE MIM -->
   <section id="sobre" style="background-color: var(--c-white);">
     <div class="container">
       <div class="section-header">// Sobre mim</div>
@@ -807,8 +827,9 @@
     </div>
   </section>
 
+  <!-- FAQ -->
   <section id="faq" class="container">
-    <div class="section-header">// Dúvidas Frequentes</div>
+    <div class="section-header">// FAQ</div>
     <div class="faq-list">
       <div class="faq-item">
         <div class="faq-question">Como agendar um ensaio? <span>+</span></div>
@@ -821,16 +842,20 @@
     </div>
   </section>
 
+  <!-- MODAL DE ZOOM -->
   <div class="modal" id="imageModal" onclick="closeModal()">
     <span class="modal-close">&times;</span>
     <img id="modalImg" src="" alt="Ampliada">
   </div>
 
+  <!-- WHATSAPP FLUTUANTE -->
   <a href="https://wa.me/message/LQ3BE4TDBZ74J1" class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
     <svg viewBox="0 0 24 24"><path fill="#fff" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01-1.87-1.87-4.36-2.9-7.01-2.9zm0 1.83c2.2 0 4.27.86 5.82 2.42 1.56 1.56 2.42 3.63 2.42 5.82 0 4.54-3.7 8.24-8.24 8.24-1.45 0-2.86-.38-4.11-1.1l-.3-.18-3.13.82.83-3.05-.19-.32c-.77-1.25-1.18-2.7-1.18-4.18 0-4.54 3.7-8.24 8.24-8.24zm4.52 10.15c-.25-.13-1.47-.72-1.7-.81-.23-.09-.4-.13-.57.13-.17.25-.66.81-.81.98-.15.17-.3.19-.55.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.73-.15-.25-.02-.38.11-.5.11-.11.25-.3.38-.45.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.57-1.38-.79-1.89-.21-.5-.43-.43-.57-.44h-.49c-.17 0-.45.06-.68.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.13.17 1.77 2.7 4.29 3.79.6.26 1.07.42 1.44.54.61.19 1.17.16 1.61.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/></svg>
   </a>
 
+  <!-- RODAPÉ COM LOGOTIPO EM PNG -->
   <footer>
+    <img src="-1.png" alt="Olhar Madeira Fotografia" class="footer-logo">
     <p style="font-size: 0.85rem; color: var(--c-sand-light);">Olhar Madeira Fotografia &copy; 2026 - Todos os direitos reservados</p>
   </footer>
 
@@ -838,9 +863,39 @@
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
 
-    menuToggle.addEventListener('click', function() {
+    menuToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
       menuToggle.classList.toggle('active');
       navMenu.classList.toggle('active');
+    });
+
+    function toggleDropdown(event, dropdownId) {
+      event.stopPropagation();
+      const dropdown = document.getElementById(dropdownId);
+      
+      document.querySelectorAll('.dropdown').forEach(item => {
+        if (item.id !== dropdownId) {
+          item.classList.remove('active');
+        }
+      });
+
+      dropdown.classList.toggle('active');
+    }
+
+    document.querySelectorAll('.nav-close-item').forEach(link => {
+      link.addEventListener('click', function() {
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+      });
+    });
+
+    document.addEventListener('click', function(event) {
+      if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+      }
     });
 
     function scrollContainer(containerId, direction) {
