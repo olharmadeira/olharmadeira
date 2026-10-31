@@ -19,7 +19,6 @@
       --c-brown-dark: #2d1800;
       --c-bg-dark: #1b1311;
       --c-charcoal: #2e2e2e;
-
       --font-title: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'Inter', -apple-system, sans-serif;
     }
@@ -49,7 +48,7 @@
       background-color: var(--c-bg-dark);
       border-bottom: 1px solid rgba(235, 203, 133, 0.15);
       z-index: 1000;
-      padding: 1rem 2rem;
+      padding: 1rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -62,7 +61,7 @@
     }
 
     .logo-img {
-      height: 32px;
+      height: 28px;
       width: auto;
       display: block;
     }
@@ -70,13 +69,13 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     nav a, .dropbtn {
       color: var(--c-sand-light);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 400;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -103,7 +102,7 @@
       display: none;
       position: absolute;
       background-color: var(--c-bg-dark);
-      min-width: 220px;
+      min-width: 200px;
       box-shadow: 0px 8px 24px rgba(0,0,0,0.4);
       z-index: 1;
       border: 1px solid rgba(235, 203, 133, 0.2);
@@ -118,10 +117,9 @@
       padding: 0.7rem 1.2rem;
       text-decoration: none;
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       letter-spacing: 0.5px;
       text-transform: none;
-      transition: background 0.2s, color 0.2s;
     }
 
     .dropdown-content a:hover {
@@ -131,6 +129,64 @@
 
     .dropdown:hover .dropdown-content {
       display: block;
+    }
+
+    /* ESTILO DO BOTÃO HAMBÚRGUER (CELULAR) */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 6px;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background-color: var(--c-sand-light);
+      transition: all 0.3s;
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--c-bg-dark);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        border-bottom: 1px solid rgba(235, 203, 133, 0.15);
+      }
+
+      nav.active {
+        max-height: 500px;
+      }
+
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+        border: none;
+        padding-left: 1rem;
+        background: transparent;
+        display: none;
+      }
+
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
     }
 
     .container {
@@ -265,13 +321,8 @@
       fill: none;
     }
 
-    .arrow-left {
-      left: 20px;
-    }
-
-    .arrow-right {
-      right: 20px;
-    }
+    .arrow-left { left: 20px; }
+    .arrow-right { right: 20px; }
 
     .testimonials-section {
       background-color: var(--c-sand-light);
@@ -347,7 +398,6 @@
       object-fit: contain;
       max-height: 520px;
       background-color: transparent;
-      box-shadow: none;
     }
 
     .about-text p {
@@ -435,10 +485,6 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     }
 
-    .blog-card.hidden {
-      display: none;
-    }
-
     .blog-img {
       width: 100%;
       height: 220px;
@@ -489,29 +535,6 @@
 
     .blog-link:hover {
       color: var(--c-terracotta);
-    }
-
-    .btn-more-container {
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .btn-more {
-      background-color: var(--c-bg-dark);
-      color: var(--c-sand-light);
-      border: 1px solid var(--c-gold-soft);
-      padding: 0.9rem 2.5rem;
-      font-size: 0.85rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.3s;
-    }
-
-    .btn-more:hover {
-      background-color: var(--c-terracotta);
-      color: var(--c-white);
     }
 
     .faq-list {
@@ -591,17 +614,12 @@
       .immersive-item {
         height: 55vh;
       }
-      header {
-        padding: 0.8rem 1.2rem;
-      }
-      nav {
-        gap: 1rem;
-      }
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER COM MENU HAMBÚRGUER MOBILE -->
   <header>
     <a href="#" class="brand-logo">
       <svg class="logo-img" viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -609,8 +627,15 @@
         <text x="65" y="70" font-family="'Inter', sans-serif" font-size="14" font-weight="300" fill="#FFFFFF" letter-spacing="6">FOTOGRAFIA</text>
       </svg>
     </a>
-    <nav>
-      <div class="dropdown">
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav id="navMenu">
+      <div class="dropdown" onclick="this.classList.toggle('active')">
         <button class="dropbtn">Ensaios &#9662;</button>
         <div class="dropdown-content">
           <a href="ensaio-familia.html">Família</a>
@@ -620,7 +645,7 @@
         </div>
       </div>
 
-      <div class="dropdown">
+      <div class="dropdown" onclick="this.classList.toggle('active')">
         <button class="dropbtn">Eventos &#9662;</button>
         <div class="dropdown-content">
           <a href="evento-casamento.html">Casamento / Civil</a>
@@ -695,75 +720,21 @@
             <p class="testimonial-text">"Você sabe que eu sou uma eterna amante de registros fotográficos. Mas de verdade desta vez fiquei sem fôlego. Você sempre nos entrega mais do que esperamos. Muito obrigada por mais uma vez eternizar a nossa história de uma forma tão única e tão nossa."</p>
             <div class="testimonial-author">— Karla (Ensaio de Família)</div>
           </div>
-
           <div class="testimonial-card">
             <p class="testimonial-text">"Simplesmente maravilhoso esse dia, foi tudo tão perfeito que me faltam palavras de agradecimento, Dê... Foi um civil com cara de igreja, tão lindo!!! Haaa ameeeiiiii demais."</p>
             <div class="testimonial-author">— Beliana (Pré-wedding)</div>
           </div>
-
           <div class="testimonial-card">
             <p class="testimonial-text">"Ahhhhhh Jesus selou nesse ensaio, a realização de um sonho gerado em meio à dor... E o instrumento utilizado foi você. Só temos a agradecer por toda a sua dedicação, hospitalidade, paciência, entrega e vida depositados em cada parte da realização desses registros de trilhões!"</p>
             <div class="testimonial-author">— Vanessa & P. (Pré-wedding)</div>
           </div>
-
           <div class="testimonial-card">
             <p class="testimonial-text">"Meu Deus, estamos impactadas. Dessa, seu trabalho é impecável. Ficou muito lindo. Obrigada pela paciência e pelo carinho."</p>
             <div class="testimonial-author">— Suzana (Ensaio de Família)</div>
           </div>
-
           <div class="testimonial-card">
-            <p class="testimonial-text">"Andressa minha querida, muito muito obrigada por captar de forma tão linda momentos inesquecíveis da minha família! Que Jesus continue te abençoando grandemente em sua caminhada, seu olhar é um dom, um presente divino."</p>
+            <p class="testimonial-text">"Andresa minha querida, muito muito obrigada por captar de forma tão linda momentos inesquecíveis da minha família! Que Jesus continue te abençoando grandemente em sua caminhada, seu olhar é um dom, um presente divino."</p>
             <div class="testimonial-author">— Sônia (Ensaio de Família)</div>
-          </div>
-
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Foi incrível, muito obrigada pela atenção, paciência conosco, Deus te abençoe grandemente.."</p>
-            <div class="testimonial-author">— Robert (Pré-wedding)</div>
-          </div>
-
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Eu quero mais um ensaio. Vale Bis? Foi perfeito, foi meu dia perfeito e estou muito feliz."</p>
-            <div class="testimonial-author">— Vanessa (Pré-wedding)</div>
-          </div>
-
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Nossa, estou muito feliz porque eu fiquei maravilhosa também, né? Muito feliz com as fotos, estão lindas de verdade. Eu já vou postar porque eu não me aguento."</p>
-            <div class="testimonial-author">— Ana Maria (Ensaio Feminino)</div>
-          </div>
-
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Obrigada pelas fotos, vídeos, por tudo. Sou tão apaixonada pelo seu trabalho."</p>
-            <div class="testimonial-author">— Karla (Ensaio de Família)</div>
-          </div>
-
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Deh, as fotos ficaram maravilhosas. Que olhar. Obrigado."</p>
-            <div class="testimonial-author">— Douglas (Ensaio de Família)</div>
-          </div>
-
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Meninaaaa que trabalho lindo estamos apaixonados aqui. Obrigado por ter registrado esse momento tão importante. Ficaram lindas as fotos."</p>
-            <div class="testimonial-author">— Daiane (Chá de Bebê)</div>
-          </div>
-
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Meu Deus, Andresa! Que fotos lindaaaas. Amei todas. Não canso de olhar essas fotos maravilhosas, você é demais."</p>
-            <div class="testimonial-author">— Ana Carolina (Ensaio de Família)</div>
-          </div>
-
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Obrigada De. Uma memória eterna no meu coração. Ameiiiii. Seu trabalho é incrível, Deus abençoe."</p>
-            <div class="testimonial-author">— Damares (Ensaio Gestante)</div>
-          </div>
-
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Me emocionei vendo as fotos, Dê. Muito obrigada. Deus te deu talentos mais que abençoados, pois você consegue transmitir através das suas fotos a nossas emoções a respeito do momento que vivemos."</p>
-            <div class="testimonial-author">— Lívia (Festa Infantil)</div>
-          </div>
-
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Esse seu olhar é um dom de Deus. Glória a Ele por você dividir toda essa sensibilidade, amor e dedicação conosco. Você é incrível, Dre."</p>
-            <div class="testimonial-author">— Júlia (Pré-wedding)</div>
           </div>
         </div>
 
@@ -805,18 +776,6 @@
             <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
           </div>
         </div>
-        <div class="blog-card hidden">
-          <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=600&q=80" alt="Locais" class="blog-img">
-          <div class="blog-content">
-            <div class="blog-tag">Locais</div>
-            <h3 class="blog-title">Locais externos encantadores para ensaios em São Paulo</h3>
-            <p class="blog-excerpt">Sugestões de parques e cenários naturais para quem ama a luz do fim de tarde.</p>
-            <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
-          </div>
-        </div>
-      </div>
-      <div class="btn-more-container">
-        <button class="btn-more" id="btnLoadMore">Veja Mais</button>
       </div>
     </div>
   </section>
@@ -829,7 +788,7 @@
         <div class="about-text">
           <div class="about-quote">“Poder partilhar o meu olhar com o mundo tem sido um grande presente pra mim, especialmente com aqueles que valorizam a fotografia”</div>
           <p>Acredito que certas fases da vida merecem ser eternizadas, até porque o único tempo que temos é o agora e cada momento vivido é irrepetível.</p>
-          <p>São esses registros que nos permitem reviver nossas histórias e emoções que, com o passar dos anos, se tornam cada vez mais valiosas. Meu olhar busca captar a beleza em tudo que existe, como em cada história que conheço.</p>
+          <p>São esses registros que nos permitem reviver nossas histórias e emoções que, com o passar dos anos, se tornam cada vez mais valiosas.</p>
           <div class="about-signature">&mdash; Andresa Madeira • Fotógrafa</div>
         </div>
       </div>
@@ -845,7 +804,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-question">Qual é a locação dos ensaios? <span>+</span></div>
-        <div class="faq-answer">Realizamos ensaios fotográficos externos (parques, praias, locações escolhidas) ou na residência do cliente.</div>
+        <div class="faq-answer">Realizamos ensaios fotográficos externos ou na residência do cliente.</div>
       </div>
     </div>
   </section>
@@ -864,50 +823,17 @@
   </footer>
 
   <script>
+    document.getElementById('menuToggle').addEventListener('click', function() {
+      document.getElementById('navMenu').classList.toggle('active');
+    });
+
     function scrollContainer(containerId, direction) {
       const container = document.getElementById(containerId);
       const firstItem = container.querySelector('div');
       if (!firstItem) return;
-      
       const itemWidth = firstItem.offsetWidth + 24; 
       container.scrollBy({ left: itemWidth * direction, behavior: 'smooth' });
     }
-
-    document.querySelectorAll('.immersive-scroll, .testimonials-scroll').forEach(container => {
-      let isDown = false;
-      let startX;
-      let scrollLeft;
-
-      container.addEventListener('mousedown', (e) => {
-        isDown = true;
-        container.style.cursor = 'grabbing';
-        startX = e.pageX - container.offsetLeft;
-        scrollLeft = container.scrollLeft;
-      });
-
-      container.addEventListener('mouseleave', () => {
-        isDown = false;
-        container.style.cursor = 'default';
-      });
-
-      container.addEventListener('mouseup', () => {
-        isDown = false;
-        container.style.cursor = 'default';
-      });
-
-      container.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - container.offsetLeft;
-        const walk = (x - startX) * 2;
-        container.scrollLeft = scrollLeft - walk;
-      });
-    });
-
-    document.getElementById('btnLoadMore').addEventListener('click', function() {
-      document.querySelectorAll('.blog-card.hidden').forEach(card => card.classList.remove('hidden'));
-      this.style.display = 'none';
-    });
 
     document.querySelectorAll('.faq-question').forEach(q => {
       q.addEventListener('click', function() {
