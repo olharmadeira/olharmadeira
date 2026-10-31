@@ -20,7 +20,7 @@
       --c-bg-dark: #1b1311;
       --c-charcoal: #191919;
       --font-title: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Neue Montreal', 'Inter', -apple-system, sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
     }
 
     * {
@@ -43,7 +43,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    p, span, .testimonial-text, .about-text p, .faq-answer, .blog-excerpt, .blog-title, .faq-question {
+    p, span, .testimonial-text, .faq-answer, .blog-excerpt, .blog-title, .faq-question {
       font-family: var(--font-body);
       color: var(--c-charcoal);
     }
@@ -138,7 +138,6 @@
       display: block;
     }
 
-    /* BOTÃO HAMBÚRGUER COM ANIMAÇÃO LATERAL */
     .menu-toggle {
       display: none;
       background: none;
@@ -234,7 +233,6 @@
       margin-bottom: 2rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      font-family: var(--font-body);
     }
 
     .hero {
@@ -344,7 +342,6 @@
     .arrow-left { left: 10px; }
     .arrow-right { right: 10px; }
 
-    /* Fundo alterado para #fdfdfd */
     .testimonials-section {
       background-color: #fdfdfd;
       padding: 5rem 0;
@@ -409,6 +406,15 @@
       font-weight: 600;
     }
 
+    .about-section {
+      background-color: #1b1311;
+      padding: 6rem 0;
+    }
+
+    .about-section .section-header {
+      color: #efdec7;
+    }
+
     .about-grid {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
@@ -425,7 +431,7 @@
 
     .about-text p {
       font-size: 1.05rem;
-      color: var(--c-charcoal);
+      color: #efdec7;
       line-height: 1.8;
       margin-bottom: 1.2rem;
     }
@@ -435,17 +441,17 @@
       font-weight: 400;
       font-size: 1.35rem;
       font-style: italic;
-      color: var(--c-charcoal);
+      color: #efdec7;
       line-height: 1.6;
       margin-bottom: 1.5rem;
-      border-left: 2px solid #1b1311;
+      border-left: 2px solid #efdec7;
       padding-left: 1.2rem;
     }
 
     .about-signature {
       font-family: var(--font-title);
       font-size: 1.4rem;
-      color: var(--c-brown-dark);
+      color: var(--c-gold-soft);
       margin-top: 1.8rem;
       font-weight: 600;
     }
@@ -651,7 +657,7 @@
 </head>
 <body>
 
-  <!-- HEADER COM LOGOTIPO EM PNG -->
+  <!-- HEADER -->
   <header>
     <a href="#" class="brand-logo">
       <img src="-1.png" alt="Olhar Madeira Fotografia" class="logo-img">
@@ -696,7 +702,7 @@
     <h1 class="hero-title">Nosso ensaio<br>com a nossa cara.</h1>
   </section>
 
-  <!-- GALERIA IMERSIVA -->
+  <!-- GALERIA -->
   <section id="galeria" class="immersive-gallery">
     <div class="gallery-container-wrapper">
       <div class="slider-arrow arrow-left" onclick="scrollContainer('immersiveScroll', -1)">
@@ -736,10 +742,10 @@
     </div>
   </section>
 
-  <!-- DEPOIMENTOS (FUNDO #fdfdfd) -->
+  <!-- DEPOIMENTOS -->
   <section id="depoimentos" class="testimonials-section">
     <div class="testimonials-wrapper">
-      <div class="section-header">// O que dizem nossos clientes</div>
+      <div class="section-header" style="color: var(--c-terracotta);">// O que dizem nossos clientes</div>
       <h2 style="font-family: var(--font-title); font-size: 2.2rem; color: var(--c-brown-dark); margin-bottom: 2.5rem;">Histórias reais, emoções eternizadas</h2>
       
       <div class="testimonials-container-wrapper">
@@ -812,7 +818,7 @@
   </section>
 
   <!-- SOBRE MIM -->
-  <section id="sobre" style="background-color: var(--c-white);">
+  <section id="sobre" class="about-section">
     <div class="container">
       <div class="section-header">// Sobre mim</div>
       <div class="about-grid">
@@ -842,18 +848,18 @@
     </div>
   </section>
 
-  <!-- MODAL DE ZOOM -->
+  <!-- MODAL -->
   <div class="modal" id="imageModal" onclick="closeModal()">
     <span class="modal-close">&times;</span>
     <img id="modalImg" src="" alt="Ampliada">
   </div>
 
-  <!-- WHATSAPP FLUTUANTE -->
+  <!-- WHATSAPP -->
   <a href="https://wa.me/message/LQ3BE4TDBZ74J1" class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
     <svg viewBox="0 0 24 24"><path fill="#fff" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01-1.87-1.87-4.36-2.9-7.01-2.9zm0 1.83c2.2 0 4.27.86 5.82 2.42 1.56 1.56 2.42 3.63 2.42 5.82 0 4.54-3.7 8.24-8.24 8.24-1.45 0-2.86-.38-4.11-1.1l-.3-.18-3.13.82.83-3.05-.19-.32c-.77-1.25-1.18-2.7-1.18-4.18 0-4.54 3.7-8.24 8.24-8.24zm4.52 10.15c-.25-.13-1.47-.72-1.7-.81-.23-.09-.4-.13-.57.13-.17.25-.66.81-.81.98-.15.17-.3.19-.55.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.73-.15-.25-.02-.38.11-.5.11-.11.25-.3.38-.45.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.57-1.38-.79-1.89-.21-.5-.43-.43-.57-.44h-.49c-.17 0-.45.06-.68.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.13.17 1.77 2.7 4.29 3.79.6.26 1.07.42 1.44.54.61.19 1.17.16 1.61.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/></svg>
   </a>
 
-  <!-- RODAPÉ COM LOGOTIPO EM PNG -->
+  <!-- FOOTER -->
   <footer>
     <img src="-1.png" alt="Olhar Madeira Fotografia" class="footer-logo">
     <p style="font-size: 0.85rem; color: var(--c-sand-light);">Olhar Madeira Fotografia &copy; 2026 - Todos os direitos reservados</p>
@@ -900,10 +906,9 @@
 
     function scrollContainer(containerId, direction) {
       const container = document.getElementById(containerId);
-      const firstItem = container.querySelector('div');
-      if (!firstItem) return;
-      const itemWidth = firstItem.offsetWidth + 24; 
-      container.scrollBy({ left: itemWidth * direction, behavior: 'smooth' });
+      if (!container) return;
+      const scrollAmount = container.clientWidth * 0.75;
+      container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
     }
 
     document.querySelectorAll('.faq-question').forEach(q => {
