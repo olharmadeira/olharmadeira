@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Olhar Madeira Fotografia</title>
+  <title>Olhar Madeira - Atualizado</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,6 +133,7 @@
       display: block;
     }
 
+    /* BOTÃO HAMBÚRGUER COM ANIMAÇÃO LATERAL */
     .menu-toggle {
       display: none;
       background: none;
@@ -141,6 +142,7 @@
       flex-direction: column;
       gap: 6px;
       padding: 4px;
+      z-index: 1001;
     }
 
     .menu-toggle span {
@@ -148,7 +150,17 @@
       width: 26px;
       height: 2px;
       background-color: var(--c-sand-light);
-      transition: all 0.3s;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
     }
 
     @media (max-width: 950px) {
@@ -157,23 +169,36 @@
       }
 
       nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
         background-color: var(--c-bg-dark);
         flex-direction: column;
         align-items: flex-start;
-        padding: 1.5rem 2rem;
-        gap: 1.2rem;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out;
-        border-bottom: 1px solid rgba(235, 203, 133, 0.15);
+        padding: 6rem 2rem 2rem 2rem;
+        gap: 1.5rem;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        overflow-y: auto;
       }
 
       nav.active {
-        max-height: 500px;
+        right: 0;
+      }
+
+      .dropdown {
+        width: 100%;
+      }
+
+      .dropbtn {
+        width: 100%;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        padding: 0.5rem 0;
       }
 
       .dropdown-content {
@@ -183,6 +208,7 @@
         padding-left: 1rem;
         background: transparent;
         display: none;
+        width: 100%;
       }
 
       .dropdown.active .dropdown-content {
@@ -809,8 +835,12 @@
   </footer>
 
   <script>
-    document.getElementById('menuToggle').addEventListener('click', function() {
-      document.getElementById('navMenu').classList.toggle('active');
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    menuToggle.addEventListener('click', function() {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
     });
 
     function scrollContainer(containerId, direction) {
