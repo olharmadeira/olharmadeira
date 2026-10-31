@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olhar Madeira Fotografia</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --c-white: #ffffff;
+      --c-offwhite: #fdfdfd;
+      --c-sand-light: #f3eee6;
+      --c-gold-soft: #ebcb85;
+      --c-terracotta: #8f5108;
+      --c-brown-dark: #2d1800;
+      --c-bg-dark: #1b1311;
+      --c-charcoal: #2e2e2e;
+
+      --font-title: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--c-white);
+      color: var(--c-charcoal);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: var(--c-bg-dark);
+      border-bottom: 1px solid rgba(235, 203, 133, 0.15);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav a, .dropbtn {
+      color: var(--c-sand-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    nav a:hover, .dropdown:hover .dropbtn {
+      color: var(--c-gold-soft);
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--c-bg-dark);
+      min-width: 220px;
+      box-shadow: 0px 8px 24px rgba(0,0,0,0.4);
+      z-index: 1;
+      border: 1px solid rgba(235, 203, 133, 0.2);
+      border-radius: 4px;
+      top: 100%;
+      left: 0;
+      padding: 0.5rem 0;
+    }
+
+    .dropdown-content a {
+      color: var(--c-sand-light);
+      padding: 0.7rem 1.2rem;
+      text-decoration: none;
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      text-transform: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: rgba(235, 203, 133, 0.1);
+      color: var(--c-gold-soft);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .section-header {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--c-terracotta);
+      margin-bottom: 2rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      height: 55vh;
+      min-height: 340px;
+      background: linear-gradient(180deg, rgba(27,19,17,0.45) 0%, rgba(27,19,17,0.75) 100%),
+                  url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--c-white);
+      padding: 0 1rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .immersive-gallery {
+      background-color: var(--c-bg-dark);
+      padding: 3rem 0;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
+    .gallery-container-wrapper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .immersive-scroll {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 0 4rem;
+      scrollbar-width: none;
+      width: 100%;
+      align-items: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .immersive-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .immersive-item {
+      flex: 0 0 auto;
+      height: 70vh;
+      min-height: 460px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background-color: var(--c-sand-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    .immersive-item:hover {
+      transform: scale(1.01);
+    }
+
+    .immersive-item img {
+      width: auto;
+      height: 100%;
+      max-width: none;
+      object-fit: contain;
+      display: block;
+      background-color: #1b1311;
+      pointer-events: none;
+    }
+
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(27, 19, 17, 0.75);
+      backdrop-filter: blur(4px);
+      color: var(--c-white);
+      border: 1px solid rgba(235, 203, 133, 0.3);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 50;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .slider-arrow:hover {
+      background-color: var(--c-bg-dark);
+      border-color: var(--c-gold-soft);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .slider-arrow svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .arrow-left {
+      left: 20px;
+    }
+
+    .arrow-right {
+      right: 20px;
+    }
+
+    .testimonials-section {
+      background-color: var(--c-sand-light);
+      padding: 5rem 0;
+      position: relative;
+    }
+
+    .testimonials-wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+
+    .testimonials-container-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .testimonials-scroll {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 1rem 3rem 2rem 3rem;
+      scrollbar-width: none;
+      width: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .testimonials-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .testimonial-card {
+      flex: 0 0 380px;
+      background: var(--c-white);
+      padding: 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(45, 24, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(235, 203, 133, 0.3);
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--c-charcoal);
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-author {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      color: var(--c-brown-dark);
+      font-weight: 600;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .about-img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: contain;
+      max-height: 520px;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      color: var(--c-charcoal);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-quote {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      font-style: italic;
+      color: var(--c-terracotta);
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+      border-left: 2px solid var(--c-gold-soft);
+      padding-left: 1.2rem;
+    }
+
+    .about-signature {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      color: var(--c-brown-dark);
+      margin-top: 1.8rem;
+      font-weight: 600;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(27, 19, 17, 0.92);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      object-fit: contain;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 2.5rem;
+      cursor: pointer;
+    }
+
+    .blog-section {
+      background-color: var(--c-offwhite);
+      border-top: 1px solid var(--c-sand-light);
+      border-bottom: 1px solid var(--c-sand-light);
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .blog-card {
+      background: var(--c-white);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--c-sand-light);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .blog-card.hidden {
+      display: none;
+    }
+
+    .blog-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .blog-content {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .blog-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--c-terracotta);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-title {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      color: var(--c-brown-dark);
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .blog-excerpt {
+      font-size: 0.92rem;
+      color: var(--c-charcoal);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .blog-link {
+      margin-top: auto;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--c-brown-dark);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .blog-link:hover {
+      color: var(--c-terracotta);
+    }
+
+    .btn-more-container {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .btn-more {
+      background-color: var(--c-bg-dark);
+      color: var(--c-sand-light);
+      border: 1px solid var(--c-gold-soft);
+      padding: 0.9rem 2.5rem;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .btn-more:hover {
+      background-color: var(--c-terracotta);
+      color: var(--c-white);
+    }
+
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--c-sand-light);
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .faq-question {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      color: var(--c-brown-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+
+    .faq-answer {
+      font-size: 0.95rem;
+      color: var(--c-charcoal);
+      margin-top: 0.8rem;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .whatsapp-float {
+      position: fixed !important;
+      bottom: 25px !important;
+      right: 25px !important;
+      width: 56px !important;
+      height: 56px !important;
+      background-color: #25d366 !important;
+      color: #ffffff !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+      z-index: 9999 !important;
+      text-decoration: none !important;
+      transition: transform 0.3s !important;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-float svg {
+      width: 32px !important;
+      height: 32px !important;
+      fill: #ffffff !important;
+    }
+
+    footer {
+      background-color: var(--c-bg-dark);
+      border-top: 1px solid rgba(235, 203, 133, 0.12);
+      padding: 4rem 1.5rem 2rem 1.5rem;
+      text-align: center;
+      color: var(--c-gold-soft);
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .immersive-item {
+        height: 55vh;
+      }
+      header {
+        padding: 0.8rem 1.2rem;
+      }
+      nav {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="brand-logo">
+      <svg class="logo-img" viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="45" font-family="'Cormorant Garamond', serif" font-size="42" font-weight="400" fill="#FFFFFF" letter-spacing="1">Olhar Madeira</text>
+        <text x="65" y="70" font-family="'Inter', sans-serif" font-size="14" font-weight="300" fill="#FFFFFF" letter-spacing="6">FOTOGRAFIA</text>
+      </svg>
+    </a>
+    <nav>
+      <div class="dropdown">
+        <button class="dropbtn">Ensaios &#9662;</button>
+        <div class="dropdown-content">
+          <a href="ensaio-familia.html">Família</a>
+          <a href="ensaio-gestante.html">Gestante</a>
+          <a href="ensaio-feminino.html">Retrato Feminino</a>
+          <a href="ensaio-prewedding.html">Pré-Wedding / Casal</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Eventos &#9662;</button>
+        <div class="dropdown-content">
+          <a href="evento-casamento.html">Casamento / Civil</a>
+          <a href="evento-infantil.html">Festa Infantil</a>
+          <a href="evento-chadebebe.html">Chá de Bebê</a>
+        </div>
+      </div>
+
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#blog">Blog</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#faq">Dúvidas</a>
+      <a href="https://wa.me/message/LQ3BE4TDBZ74J1" target="_blank">Contato</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-title">Nosso ensaio<br>com a nossa cara.</h1>
+  </section>
+
+  <section id="galeria" class="immersive-gallery">
+    <div class="gallery-container-wrapper">
+      <div class="slider-arrow arrow-left" onclick="scrollContainer('immersiveScroll', -1)">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </div>
+      
+      <div class="immersive-scroll" id="immersiveScroll">
+        <div class="immersive-item" onclick="openModal(this.querySelector('img').src)">
+          <img src="galeria-1.jpg" alt="Olhar Madeira 1">
+        </div>
+        <div class="immersive-item" onclick="openModal(this.querySelector('img').src)">
+          <img src="galeria-2.jpg" alt="Olhar Madeira 2">
+        </div>
+        <div class="immersive-item" onclick="openModal(this.querySelector('img').src)">
+          <img src="galeria-3.jpg" alt="Olhar Madeira 3">
+        </div>
+        <div class="immersive-item" onclick="openModal(this.querySelector('img').src)">
+          <img src="galeria-4.jpg" alt="Olhar Madeira 4">
+        </div>
+        <div class="immersive-item" onclick="openModal(this.querySelector('img').src)">
+          <img src="galeria-5.jpg" alt="Olhar Madeira 5">
+        </div>
+        <div class="immersive-item" onclick="openModal(this.querySelector('img').src)">
+          <img src="galeria-6.jpg" alt="Olhar Madeira 6">
+        </div>
+        <div class="immersive-item" onclick="openModal(this.querySelector('img').src)">
+          <img src="galeria-7.jpg" alt="Olhar Madeira 7">
+        </div>
+        <div class="immersive-item" onclick="openModal(this.querySelector('img').src)">
+          <img src="galeria-8.jpg" alt="Olhar Madeira 8">
+        </div>
+      </div>
+
+      <div class="slider-arrow arrow-right" onclick="scrollContainer('immersiveScroll', 1)">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos" class="testimonials-section">
+    <div class="testimonials-wrapper">
+      <div class="section-header" style="color: var(--c-terracotta);">// O que dizem nossos clientes</div>
+      <h2 style="font-family: var(--font-title); font-size: 2.2rem; color: var(--c-brown-dark); margin-bottom: 2.5rem;">Histórias reais, emoções eternizadas</h2>
+      
+      <div class="testimonials-container-wrapper">
+        <div class="slider-arrow arrow-left" onclick="scrollContainer('testimonialsScroll', -1)">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </div>
+
+        <div class="testimonials-scroll" id="testimonialsScroll">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Você sabe que eu sou uma eterna amante de registros fotográficos. Mas de verdade desta vez fiquei sem fôlego. Você sempre nos entrega mais do que esperamos. Muito obrigada por mais uma vez eternizar a nossa história de uma forma tão única e tão nossa."</p>
+            <div class="testimonial-author">— Karla (Ensaio de Família)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Simplesmente maravilhoso esse dia, foi tudo tão perfeito que me faltam palavras de agradecimento, Dê... Foi um civil com cara de igreja, tão lindo!!! Haaa ameeeiiiii demais."</p>
+            <div class="testimonial-author">— Beliana (Pré-wedding)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Ahhhhhh Jesus selou nesse ensaio, a realização de um sonho gerado em meio à dor... E o instrumento utilizado foi você. Só temos a agradecer por toda a sua dedicação, hospitalidade, paciência, entrega e vida depositados em cada parte da realização desses registros de trilhões!"</p>
+            <div class="testimonial-author">— Vanessa & P. (Pré-wedding)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Meu Deus, estamos impactadas. Dessa, seu trabalho é impecável. Ficou muito lindo. Obrigada pela paciência e pelo carinho."</p>
+            <div class="testimonial-author">— Suzana (Ensaio de Família)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Andressa minha querida, muito muito obrigada por captar de forma tão linda momentos inesquecíveis da minha família! Que Jesus continue te abençoando grandemente em sua caminhada, seu olhar é um dom, um presente divino."</p>
+            <div class="testimonial-author">— Sônia (Ensaio de Família)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Foi incrível, muito obrigada pela atenção, paciência conosco, Deus te abençoe grandemente.."</p>
+            <div class="testimonial-author">— Robert (Pré-wedding)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Eu quero mais um ensaio. Vale Bis? Foi perfeito, foi meu dia perfeito e estou muito feliz."</p>
+            <div class="testimonial-author">— Vanessa (Pré-wedding)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Nossa, estou muito feliz porque eu fiquei maravilhosa também, né? Muito feliz com as fotos, estão lindas de verdade. Eu já vou postar porque eu não me aguento."</p>
+            <div class="testimonial-author">— Ana Maria (Ensaio Feminino)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Obrigada pelas fotos, vídeos, por tudo. Sou tão apaixonada pelo seu trabalho."</p>
+            <div class="testimonial-author">— Karla (Ensaio de Família)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Deh, as fotos ficaram maravilhosas. Que olhar. Obrigado."</p>
+            <div class="testimonial-author">— Douglas (Ensaio de Família)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Meninaaaa que trabalho lindo estamos apaixonados aqui. Obrigado por ter registrado esse momento tão importante. Ficaram lindas as fotos."</p>
+            <div class="testimonial-author">— Daiane (Chá de Bebê)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Meu Deus, Andresa! Que fotos lindaaaas. Amei todas. Não canso de olhar essas fotos maravilhosas, você é demais."</p>
+            <div class="testimonial-author">— Ana Carolina (Ensaio de Família)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Obrigada De. Uma memória eterna no meu coração. Ameiiiii. Seu trabalho é incrível, Deus abençoe."</p>
+            <div class="testimonial-author">— Damares (Ensaio Gestante)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Me emocionei vendo as fotos, Dê. Muito obrigada. Deus te deu talentos mais que abençoados, pois você consegue transmitir através das suas fotos a nossas emoções a respeito do momento que vivemos."</p>
+            <div class="testimonial-author">— Lívia (Festa Infantil)</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Esse seu olhar é um dom de Deus. Glória a Ele por você dividir toda essa sensibilidade, amor e dedicação conosco. Você é incrível, Dre."</p>
+            <div class="testimonial-author">— Júlia (Pré-wedding)</div>
+          </div>
+        </div>
+
+        <div class="slider-arrow arrow-right" onclick="scrollContainer('testimonialsScroll', 1)">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="blog" class="blog-section">
+    <div class="container">
+      <div class="section-header">// Novidades no blog</div>
+      <div class="blog-grid" id="blogGrid">
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Casal" class="blog-img">
+          <div class="blog-content">
+            <div class="blog-tag">Dicas & Prep</div>
+            <h3 class="blog-title">Como escolher o look ideal para o seu ensaio ao ar livre</h3>
+            <p class="blog-excerpt">Pequenos detalhes de paleta e tecido ajudam a trazer harmonia e autenticidade aos registros.</p>
+            <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Família" class="blog-img">
+          <div class="blog-content">
+            <div class="blog-tag">Histórias</div>
+            <h3 class="blog-title">A beleza da espontaneidade nos registros em família</h3>
+            <p class="blog-excerpt">Por que os melhores momentos acontecem quando você esquece da câmera.</p>
+            <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Branding" class="blog-img">
+          <div class="blog-content">
+            <div class="blog-tag">Branding</div>
+            <h3 class="blog-title">Retrato Feminino: Como a fotografia fortalece sua marca</h3>
+            <p class="blog-excerpt">Transmitir autoridade e conexão através de imagens planejadas.</p>
+            <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
+          </div>
+        </div>
+        <div class="blog-card hidden">
+          <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=600&q=80" alt="Locais" class="blog-img">
+          <div class="blog-content">
+            <div class="blog-tag">Locais</div>
+            <h3 class="blog-title">Locais externos encantadores para ensaios em São Paulo</h3>
+            <p class="blog-excerpt">Sugestões de parques e cenários naturais para quem ama a luz do fim de tarde.</p>
+            <a href="#" class="blog-link">VER ARTIGO COMPLETO &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="btn-more-container">
+        <button class="btn-more" id="btnLoadMore">Veja Mais</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" style="background-color: var(--c-white);">
+    <div class="container">
+      <div class="section-header">// Sobre mim</div>
+      <div class="about-grid">
+        <img src="foto.jpg" alt="Andresa Madeira - Fotógrafa" class="about-img">
+        <div class="about-text">
+          <div class="about-quote">“Poder partilhar o meu olhar com o mundo tem sido um grande presente pra mim, especialmente com aqueles que valorizam a fotografia”</div>
+          <p>Acredito que certas fases da vida merecem ser eternizadas, até porque o único tempo que temos é o agora e cada momento vivido é irrepetível.</p>
+          <p>São esses registros que nos permitem reviver nossas histórias e emoções que, com o passar dos anos, se tornam cada vez mais valiosas. Meu olhar busca captar a beleza em tudo que existe, como em cada história que conheço.</p>
+          <div class="about-signature">&mdash; Andresa Madeira • Fotógrafa</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="container">
+    <div class="section-header">// Dúvidas Frequentes</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">Como agendar um ensaio? <span>+</span></div>
+        <div class="faq-answer">Você pode entrar em contato diretamente pelo nosso botão do WhatsApp para verificarmos datas disponíveis.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Qual é a locação dos ensaios? <span>+</span></div>
+        <div class="faq-answer">Realizamos ensaios fotográficos externos (parques, praias, locações escolhidas) ou na residência do cliente.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal" id="imageModal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img id="modalImg" src="" alt="Ampliada">
+  </div>
+
+  <a href="https://wa.me/message/LQ3BE4TDBZ74J1" class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
+    <svg viewBox="0 0 24 24"><path fill="#fff" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01-1.87-1.87-4.36-2.9-7.01-2.9zm0 1.83c2.2 0 4.27.86 5.82 2.42 1.56 1.56 2.42 3.63 2.42 5.82 0 4.54-3.7 8.24-8.24 8.24-1.45 0-2.86-.38-4.11-1.1l-.3-.18-3.13.82.83-3.05-.19-.32c-.77-1.25-1.18-2.7-1.18-4.18 0-4.54 3.7-8.24 8.24-8.24zm4.52 10.15c-.25-.13-1.47-.72-1.7-.81-.23-.09-.4-.13-.57.13-.17.25-.66.81-.81.98-.15.17-.3.19-.55.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.73-.15-.25-.02-.38.11-.5.11-.11.25-.3.38-.45.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.57-1.38-.79-1.89-.21-.5-.43-.43-.57-.44h-.49c-.17 0-.45.06-.68.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.13.17 1.77 2.7 4.29 3.79.6.26 1.07.42 1.44.54.61.19 1.17.16 1.61.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/></svg>
+  </a>
+
+  <footer>
+    <p style="font-size: 0.85rem; color: var(--c-sand-light);">Olhar Madeira Fotografia &copy; 2026 - Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    function scrollContainer(containerId, direction) {
+      const container = document.getElementById(containerId);
+      const firstItem = container.querySelector('div');
+      if (!firstItem) return;
+      
+      const itemWidth = firstItem.offsetWidth + 24; 
+      container.scrollBy({ left: itemWidth * direction, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.immersive-scroll, .testimonials-scroll').forEach(container => {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        container.style.cursor = 'grabbing';
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+      });
+
+      container.addEventListener('mouseleave', () => {
+        isDown = false;
+        container.style.cursor = 'default';
+      });
+
+      container.addEventListener('mouseup', () => {
+        isDown = false;
+        container.style.cursor = 'default';
+      });
+
+      container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2;
+        container.scrollLeft = scrollLeft - walk;
+      });
+    });
+
+    document.getElementById('btnLoadMore').addEventListener('click', function() {
+      document.querySelectorAll('.blog-card.hidden').forEach(card => card.classList.remove('hidden'));
+      this.style.display = 'none';
+    });
+
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', function() {
+        const item = this.parentElement;
+        item.classList.toggle('active');
+        this.querySelector('span').textContent = item.classList.contains('active') ? '-' : '+';
+      });
+    });
+
+    function openModal(src) {
+      document.getElementById('imageModal').style.display = 'flex';
+      document.getElementById('modalImg').src = src;
+    }
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
